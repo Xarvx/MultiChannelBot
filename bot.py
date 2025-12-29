@@ -1,6 +1,7 @@
 import logging
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import os
 
 # Configuración de logging
 logging.basicConfig(
@@ -10,16 +11,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ===== CONFIGURACIÓN =====
-BOT_TOKEN = '8061056289:AAGmeFnqCEUYF_rdjo4zKBf2Z59pxB6iU8g'  # Token de BotFather
-ADMIN_ID = 7682792198  # Tu ID de usuario de Telegram
-
-# IDs de tus canales (con @ o ID numérico)
-CANALES = [
-    '@@ZamnHc',
-    '@@referenceszamnhtbackup',
-    '@@referenceszamnhtbackup2',
-    # Agrega más canales según necesites
-]
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+ADMIN_ID = int(os.environ.get('ADMIN_ID'))
+CANALES = os.environ.get('CANALES', '').split(',')
 
 # ===== FUNCIONES =====
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
